@@ -56,3 +56,6 @@ module.exports.idToDeleteIsNotValid = idToDeleteIsNotValid = () => {
 module.exports.cardDeckIdNotFound = cardDeckIdNotFound = () => {
   throw new ApolloError("Card Deck ID not found", "CARDDECKID_NOT_FOUND");
 };
+module.exports.cardIdNotFound = cardIdNotFound = () => {
+  throw new ApolloError("Card ID not found", "CARDID_NOT_FOUND");
+};

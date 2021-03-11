@@ -30,7 +30,7 @@ module.exports.cardDeckValidation = cardDeckValidation = (data) => {
 module.exports.cardValidation = cardValidation = (data) => {
   const schema = Joi.object().keys({
     front: Joi.string().min(1).max(1024).label("front"),
-    back: Joi.string().min(1).max(1024).required().label("back"),
+    back: Joi.string().min(1).max(1024).label("back"),
   });
 
   return schema.validate(data);

@@ -66,5 +66,12 @@ module.exports = gql`
     #carddecks
     createCardDeck(name: String!, description: String): Boolean!
     addCard(cardDeckId: String!, front: String!, back: String!): Boolean!
+    modifyCard(
+      cardDeckId: String!
+      cardId: Int!
+      front: String
+      back: String
+      score: Float
+    ): Boolean!
   }
 `;

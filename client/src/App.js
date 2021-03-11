@@ -45,7 +45,7 @@ export default function App() {
         console.log('invalid refresh token');
         console.log(err);
         authCookies.removeAuthCookies();
-        setToken('emergency'); 
+        setToken('emergency');
       });
   };
 
