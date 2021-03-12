@@ -22,7 +22,7 @@ module.exports.loginValidation = loginValidation = (data) => {
 module.exports.cardDeckValidation = cardDeckValidation = (data) => {
   const schema = Joi.object().keys({
     name: Joi.string().min(1).max(40).label("Name"),
-    description: Joi.string().min(1).max(256).required().label("Description"),
+    description: Joi.string().min(1).max(256).label("Description"),
   });
 
   return schema.validate(data);

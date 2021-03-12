@@ -4,6 +4,8 @@ const loginResolver = require("./resolvers/login");
 const refreshTokenResolver = require("./resolvers/refreshToken");
 
 const createCardDeck = require("./resolvers/cardDeck/createCardDeck");
+const removeCardDeck = require("./resolvers/cardDeck/removeCardDeck");
+const modifyCardDeck = require("./resolvers/cardDeck/modifyCardDeck");
 const getOwnCardDecks = require("./resolvers/cardDeck/getOwnCardDecks");
 const getCardDeck = require("./resolvers/cardDeck/getCardDeck");
 const addCard = require("./resolvers/cardDeck/addCard");
@@ -26,6 +28,8 @@ module.exports = {
     ...refreshTokenResolver.Mutation,
     ...adminDelete.Mutation,
     ...createCardDeck.Mutation,
+    ...removeCardDeck.Mutation,
+    ...modifyCardDeck.Mutation,
     ...addCard.Mutation,
     ...modifyCard.Mutation,
     ...removeCard.Mutation,

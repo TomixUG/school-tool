@@ -66,6 +66,12 @@ module.exports = gql`
     adminDelete(idToDelete: String!, whatToDelete: String!): Boolean!
     #carddecks
     createCardDeck(name: String!, description: String): Boolean!
+    removeCardDeck(cardDeckId: String!): Boolean!
+    modifyCardDeck(
+      cardDeckId: String!
+      name: String
+      description: String
+    ): Boolean!
     addCard(cardDeckId: String!, front: String!, back: String!): Boolean!
     modifyCard(
       cardDeckId: String!
