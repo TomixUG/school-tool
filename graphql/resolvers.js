@@ -8,6 +8,7 @@ const getOwnCardDecks = require("./resolvers/cardDeck/getOwnCardDecks");
 const getCardDeck = require("./resolvers/cardDeck/getCardDeck");
 const addCard = require("./resolvers/cardDeck/addCard");
 const modifyCard = require("./resolvers/cardDeck/modifyCard");
+const removeCard = require("./resolvers/cardDeck/removeCard");
 
 const getRegisteredUsers = require("./resolvers/admin/getRegisteredUsers"); //admin
 const adminDelete = require("./resolvers/admin/adminDelete"); //admin
@@ -27,5 +28,6 @@ module.exports = {
     ...createCardDeck.Mutation,
     ...addCard.Mutation,
     ...modifyCard.Mutation,
+    ...removeCard.Mutation,
   },
 };

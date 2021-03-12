@@ -59,3 +59,9 @@ module.exports.cardDeckIdNotFound = cardDeckIdNotFound = () => {
 module.exports.cardIdNotFound = cardIdNotFound = () => {
   throw new ApolloError("Card ID not found", "CARDID_NOT_FOUND");
 };
+module.exports.cardDeckIdOrCardIdNotFound = cardDeckIdOrCardIdNotFound = () => {
+  throw new ApolloError(
+    "Card Deck ID Or Card ID Not Found",
+    "CARDDECKID_OR_CARDID_NOT_FOUND"
+  );
+};

@@ -35,6 +35,7 @@ module.exports = gql`
     createdAt: String!
   }
   type Card {
+    id: String!
     front: String!
     back: String!
     score: Float
@@ -68,10 +69,11 @@ module.exports = gql`
     addCard(cardDeckId: String!, front: String!, back: String!): Boolean!
     modifyCard(
       cardDeckId: String!
-      cardId: Int!
+      cardId: String!
       front: String
       back: String
       score: Float
     ): Boolean!
+    removeCard(cardDeckId: String!, cardId: String!): Boolean!
   }
 `;

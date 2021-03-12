@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { cardDeckId } = require("../util/randomId");
+const { cardDeckId, cardId } = require("../util/randomId");
 
 const schema = new mongoose.Schema({
   userId: {
@@ -22,10 +22,14 @@ const schema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  cards: {
-    type: Array,
-    required: true,
-  },
+  cards: [
+    {
+      id: { type: String, default: cardId },
+      front: { type: String, required: true },
+      back: { type: String, required: true },
+      score: { type: Number, required: true, default: -1 },
+    },
+  ],
 });
 
 module.exports = mongoose.model("carddecks", schema);

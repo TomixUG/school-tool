@@ -21,3 +21,7 @@ exports.cardDeckId = () => {
 exports.refreshTokenId = () => {
   return Math.random().toString(36).substring(7) + Date.now().toString(36);
 };
+
+exports.cardId = () => {
+  return Math.random().toString(36).substring(7) + Date.now().toString(36);
+};

@@ -21,7 +21,7 @@ module.exports = {
 
       var db = await CardDecks.updateOne(
         { userId: data.userId, id: cardDeckId },
-        { $push: { cards: { front: front, back: back, score: -1 } } }
+        { $push: { cards: { front: front, back: back } } }
       );
 
       if (db.nModified === 0) return errors.cardDeckIdNotFound();
