@@ -10,15 +10,22 @@ export default {
       divider: true,
     },
     {
-      name: 'Test',
-      url: '/test',
-      icon: 'Anchor',
+      name: 'Flashcards',
+      icon: 'Book',
+      prefix: 'flashcards',
+      children: [
+        {
+          name: 'Card decks',
+          url: '/flashcards/carddecks',
+        },
+      ],
     },
   ],
   bottom: [
     {
       name: 'Admin settings',
       icon: 'Tool',
+      prefix: 'admin',
       admin: true,
       children: [
         {

@@ -30,7 +30,7 @@ module.exports = gql`
   #carddecks
   type OwnCardDecks {
     name: String!
-    description: String!
+    description: String
     id: String!
     createdAt: String!
   }

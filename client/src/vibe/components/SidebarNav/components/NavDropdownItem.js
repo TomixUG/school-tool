@@ -7,11 +7,17 @@ export default class NavDropdownItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
     };
   }
-  toggle = e => {
-    this.setState(prevState => ({ open: !prevState.open }));
+  //automaticly open drop down item on page refresh
+  componentWillMount = () => {
+    var dividedUrl = window.location.pathname.split('/');
+    var prefix = this.props.item.prefix;
+    if (dividedUrl[1] === prefix) this.setState({ open: true });
+  };
+  toggle = (e) => {
+    this.setState((prevState) => ({ open: !prevState.open }));
     e.preventDefault();
     e.stopPropagation();
   };
@@ -19,17 +25,13 @@ export default class NavDropdownItem extends Component {
     const { item } = this.props;
     const isExpanded = this.state.open ? 'open' : '';
     const Icon = item.icon ? Feather[item.icon] : null;
-    const ExpandIcon = this.state.open
-      ? Feather.ChevronDown
-      : Feather.ChevronRight;
+    const ExpandIcon = this.state.open ? Feather.ChevronDown : Feather.ChevronRight;
     return (
       <li className={`nav-item has-submenu ${isExpanded}`}>
         <a href="#!" role="button" onClick={this.toggle}>
           {item.icon && Icon && <Icon className="side-nav-icon" />}
           <span className="nav-item-label">{item.name}</span>{' '}
-          {item.badge && (
-            <NavBadge color={item.badge.variant} text={item.badge.text} />
-          )}
+          {item.badge && <NavBadge color={item.badge.variant} text={item.badge.text} />}
           <ExpandIcon className="menu-expand-icon" />
         </a>
         {(this.state.open || this.props.isSidebarCollapsed) && (

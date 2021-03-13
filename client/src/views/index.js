@@ -3,6 +3,7 @@ import ErrorPage from './pages/404';
 import Test from './pages/Test';
 import Account from './pages/Account';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import CardDeckList from './pages/flashcards/CardDeckList';
 //admin
 import ListOfUsers from './pages/admin/ListOfUsers';
 
@@ -37,6 +38,11 @@ const pageList = [
     name: '404',
     path: '/pages/404',
     component: ErrorPage,
+  },
+  {
+    name: 'Flashcards',
+    path: '/flashcards/carddecks',
+    component: CardDeckList,
   },
 ];
 
