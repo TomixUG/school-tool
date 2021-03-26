@@ -148,7 +148,9 @@ function DashboardLayout(props) {
               {/* This are the routes  TODO:*/}
               <Switch>
                 {routes.map((page, key) =>
-                  page.admin && admin === false ? null : <Route path={page.path} component={page.component} key={key} />
+                  page.admin && admin === false ? null : (
+                    <Route exact path={page.path} component={page.component} key={key} />
+                  )
                 )}
                 <Redirect from="/" to="/home" />
               </Switch>

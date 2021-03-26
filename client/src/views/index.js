@@ -3,7 +3,9 @@ import ErrorPage from './pages/404';
 import Test from './pages/Test';
 import Account from './pages/Account';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+
 import CardDeckList from './pages/flashcards/CardDeckList';
+import Deck from './pages/flashcards/Deck';
 //admin
 import ListOfUsers from './pages/admin/ListOfUsers';
 
@@ -41,8 +43,13 @@ const pageList = [
   },
   {
     name: 'Flashcards',
-    path: '/flashcards/carddecks',
+    path: '/flashcards',
     component: CardDeckList,
+  },
+  {
+    name: 'Deck',
+    path: '/flashcards/deck/:id',
+    component: Deck,
   },
 ];
 

@@ -13,12 +13,7 @@ export default {
       name: 'Flashcards',
       icon: 'Book',
       prefix: 'flashcards',
-      children: [
-        {
-          name: 'Card decks',
-          url: '/flashcards/carddecks',
-        },
-      ],
+      url: '/flashcards/',
     },
   ],
   bottom: [
