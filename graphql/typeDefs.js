@@ -44,6 +44,7 @@ module.exports = gql`
     name: String!
     description: String!
     createdAt: String!
+    numberOfCards: Int!
     cards: [Card]!
   }
 

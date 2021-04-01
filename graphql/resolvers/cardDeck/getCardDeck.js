@@ -15,6 +15,7 @@ module.exports = {
         name: db.name,
         description: db.description,
         createdAt: db.createdAt,
+        numberOfCards: db.cards.length,
         cards: db.cards,
       };
     },
