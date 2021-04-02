@@ -1,8 +1,8 @@
 import React from 'react';
-import { Alert, Row, Col, Card, CardHeader, CardBody, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Alert, Row, Col, Card, CardHeader, CardBody, Button } from 'reactstrap';
 import moment from 'moment';
 import { gql, useQuery } from '@apollo/client';
-import { X, Play } from 'react-feather';
+import { X, Play, Plus } from 'react-feather';
 import { useHistory } from 'react-router-dom';
 
 import CardList from './Deck/CardList';
@@ -27,15 +27,14 @@ const GET_OWN_CARD_DECKS = gql`
 function Deck(props) {
   const cardDeckId = props.match.params.id;
   let history = useHistory();
-  const { loading, error, data } = useQuery(GET_OWN_CARD_DECKS, { variables: { cardDeckId: cardDeckId } });
+  const { loading, error, data, refetch } = useQuery(GET_OWN_CARD_DECKS, { variables: { cardDeckId: cardDeckId } });
 
   if (loading) return <h1>Loading..</h1>;
   if (error) return <Alert color="danger">{error.message}</Alert>;
 
   return (
     <div>
-      {/* <h1>{data.getCardDeck.name}</h1>
-      <p>{data.getCardDeck.description}</p> */}
+      {/* Header */}
       <Row>
         <Col xs="12" md="12">
           <Card>
@@ -61,9 +60,12 @@ function Deck(props) {
           </Card>
         </Col>
       </Row>
+      {/* END of Header */}
+
+      {/* Info and Controls */}
       <Row>
-        <Col xs="12" md="4">
-          <Card>
+        <Col xs="12" md="4" className="py-2">
+          <Card className="h-100">
             <CardHeader>Stats</CardHeader>
             <CardBody>
               <ul>
@@ -75,47 +77,49 @@ function Deck(props) {
             </CardBody>
           </Card>
         </Col>
-        <Col xs="12" md="4">
-          <Card>
+        <Col xs="12" md="4" className="py-2">
+          <Card className="h-100">
             <CardHeader>Play</CardHeader>
             <CardBody style={{ textAlign: 'center' }}>
               {/* TODO: */}
               <Button size="lg" color="success">
-                <Play /> Play
+                <Play /> Start learning
               </Button>
             </CardBody>
           </Card>
         </Col>
-        <Col xs="12" md="4">
-          <Card>
-            <CardHeader>Add new card</CardHeader>
-            <CardBody>
-              <Form>
-                <FormGroup>
-                  <Label for="exampleEmail">Front</Label>
-                  <Input type="textarea" name="text" id="exampleText" />
-                </FormGroup>
-                <FormGroup>
-                  <Label for="exampleEmail">Back</Label>
-                  <Input type="textarea" name="text" id="exampleText" />
-                </FormGroup>
-                <hr />
-                <Button color="primary">Submit</Button>
-              </Form>
+        <Col xs="12" md="4" className="py-2">
+          <Card className="h-100">
+            <CardHeader>Add new cards</CardHeader>
+            <CardBody style={{ textAlign: 'center' }}>
+              {/* <AddCard cardDeckId={cardDeckId} refetch={refetch} /> */}
+              <Button
+                color="primary"
+                onClick={() => {
+                  history.push(`/flashcards/deck/${cardDeckId}/addcard`);
+                }}
+              >
+                <Plus /> Add new cards
+              </Button>
             </CardBody>
           </Card>
         </Col>
       </Row>
+      <br />
+      {/* END of Info and Controls */}
+
+      {/* List of cardss */}
       <Row>
         <Col xs="12" md="12">
           <Card>
-            <CardHeader>List of cards</CardHeader>
+            <CardHeader>List of cards ({data.getCardDeck.numberOfCards})</CardHeader>
             <CardBody>
               <CardList data={data} />
             </CardBody>
           </Card>
         </Col>
       </Row>
+      {/* END of List of cardss */}
     </div>
   );
 }

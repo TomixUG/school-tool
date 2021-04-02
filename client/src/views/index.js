@@ -6,6 +6,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 
 import CardDeckList from './pages/flashcards/CardDeckList';
 import Deck from './pages/flashcards/Deck';
+import AddCard from './pages/flashcards/Deck/AddCard';
 //admin
 import ListOfUsers from './pages/admin/ListOfUsers';
 
@@ -50,6 +51,11 @@ const pageList = [
     name: 'Deck',
     path: '/flashcards/deck/:id',
     component: Deck,
+  },
+  {
+    name: 'Add new card',
+    path: '/flashcards/deck/:id/addcard',
+    component: AddCard,
   },
 ];
 
