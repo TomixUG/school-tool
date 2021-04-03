@@ -114,7 +114,7 @@ function Deck(props) {
           <Card>
             <CardHeader>List of cards ({data.getCardDeck.numberOfCards})</CardHeader>
             <CardBody>
-              <CardList data={data} />
+              <CardList qData={data} refetch={refetch} cardDeckId={cardDeckId} />
             </CardBody>
           </Card>
         </Col>
