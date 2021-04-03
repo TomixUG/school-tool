@@ -3,6 +3,7 @@ import { Card, CardBody, Row, Col, Button, Input, Form, Spinner, Alert } from 'r
 import { useMutation, gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { Edit2, Trash2, Check } from 'react-feather';
+import TextareaAutosize from 'react-autosize-textarea';
 
 const MODIFY_CARD = gql`
   mutation modifyCard($cardDeckId: String!, $cardId: String!, $front: String!, $back: String!) {
@@ -47,22 +48,22 @@ function CardList({ qData, refetch, cardDeckId }) {
                   <Form onSubmit={handleSubmit(onSubmit)}>
                     <Row form>
                       <Col xs="12" md="5">
-                        <Input
-                          type="textarea"
+                        <TextareaAutosize
+                          className="form-control"
                           defaultValue={card.front}
-                          innerRef={register}
+                          ref={register}
                           name="front"
                           required
-                        ></Input>
+                        />
                       </Col>
                       <Col xs="12" md="6">
-                        <Input
-                          type="textarea"
+                        <TextareaAutosize
+                          className="form-control"
                           defaultValue={card.back}
-                          innerRef={register}
+                          ref={register}
                           name="back"
                           required
-                        ></Input>
+                        />
                       </Col>
                       <Col xs="12" md="1">
                         {loading === false ? (

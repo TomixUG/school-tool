@@ -1,10 +1,11 @@
 import React from 'react';
 //prettier-ignore
-import { Form, FormGroup, Label, Input, Button, Alert, Spinner, Card, CardHeader, CardBody, Col, Row } from 'reactstrap';
+import { Form, FormGroup, Label, Button, Alert, Spinner, Card, CardHeader, CardBody, Col, Row } from 'reactstrap';
 import { useMutation, gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { ArrowLeft } from 'react-feather';
+import TextareaAutosize from 'react-autosize-textarea';
 
 const ADD_CARD = gql`
   mutation addCard($cardDeckId: String!, $front: String!, $back: String!) {
@@ -49,11 +50,11 @@ function AddCard(props) {
           <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
               <Label for="exampleEmail">Front</Label>
-              <Input type="textarea" name="front" innerRef={register} required />
+              <TextareaAutosize className="form-control" ref={register} name="front" required rows={4} />
             </FormGroup>
             <FormGroup>
               <Label for="exampleEmail">Back</Label>
-              <Input type="textarea" name="back" innerRef={register} required />
+              <TextareaAutosize className="form-control" ref={register} name="back" required rows={4} />
             </FormGroup>
             <hr />
 
