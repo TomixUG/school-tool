@@ -84,10 +84,10 @@ function CardList({ qData, refetch, cardDeckId }) {
               ) : (
                 <Row>
                   <Col xs="12" md="5">
-                    <p>{card.front}</p>
+                    <div dangerouslySetInnerHTML={{ __html: card.front.replace(/\r?\n/g, '<br />') }} />
                   </Col>
                   <Col xs="12" md="6">
-                    <p>{card.back}</p>
+                    <div dangerouslySetInnerHTML={{ __html: card.back.replace(/\r?\n/g, '<br />') }} />
                   </Col>
                   <Col xs="12" md="1">
                     <Button size="sm" color="primary" onClick={() => setEditId(card.id)} title="Edit">
