@@ -4,6 +4,7 @@ import { useMutation, gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { Edit2, Trash2, Check } from 'react-feather';
 import TextareaAutosize from 'react-autosize-textarea';
+import CardRemoveModal from './CardRemoveModal';
 
 const MODIFY_CARD = gql`
   mutation modifyCard($cardDeckId: String!, $cardId: String!, $front: String!, $back: String!) {
@@ -35,9 +36,20 @@ function CardList({ qData, refetch, cardDeckId }) {
     setE(false);
   }, [editId]);
 
+  //remove modal
+  const [modal, setModal] = useState(false);
+  const [current, setCurrent] = useState({ front: '', back: '' });
+
   if (qData.getCardDeck.cards.length === 0) return <h4>No cards have been added yet</h4>;
   return (
     <div>
+      <CardRemoveModal
+        modal={modal}
+        close={() => setModal(false)}
+        refetch={refetch}
+        current={current}
+        cardDeckId={cardDeckId}
+      />
       <Card>
         <CardBody>
           {qData.getCardDeck.cards.map((card) => (
@@ -75,9 +87,6 @@ function CardList({ qData, refetch, cardDeckId }) {
                             <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
                           </Button>
                         )}{' '}
-                        <Button size="sm" color="danger" title="Delete">
-                          <Trash2 />
-                        </Button>
                       </Col>
                     </Row>
                   </Form>
@@ -94,7 +103,15 @@ function CardList({ qData, refetch, cardDeckId }) {
                     <Button size="sm" color="primary" onClick={() => setEditId(card.id)} title="Edit">
                       <Edit2 />
                     </Button>{' '}
-                    <Button size="sm" color="danger" title="Delete">
+                    <Button
+                      size="sm"
+                      color="danger"
+                      title="Delete"
+                      onClick={() => {
+                        setCurrent({ cardId: card.id, front: card.front, back: card.back });
+                        setModal(true);
+                      }}
+                    >
                       <Trash2 />
                     </Button>
                   </Col>
