@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, Col, Row } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
+import { Plus } from 'react-feather';
+
+import CardDeckCreateModal from './CardDeckCreateModal';
 
 const GET_OWN_CARD_DECKS = gql`
   query getOwnCardDecks {
@@ -15,6 +18,7 @@ const GET_OWN_CARD_DECKS = gql`
 `;
 
 function CardDeckList() {
+  const [modal, setModal] = useState(false);
   let history = useHistory();
   const { loading, error, data, refetch } = useQuery(GET_OWN_CARD_DECKS);
 
@@ -22,7 +26,19 @@ function CardDeckList() {
   if (error) return `Error! ${error.message}`;
   return (
     <div>
-      <h1>List of your card decks</h1>
+      <CardDeckCreateModal modal={modal} close={() => setModal(false)} refetch={refetch} />
+      <Row>
+        <Col xs="12" md="8">
+          <h1>List of your card decks</h1>
+        </Col>
+        <Col xs="6" md="4">
+          <span className="float-md-right ">
+            <Button color="primary" onClick={() => setModal(true)}>
+              <Plus /> Deck
+            </Button>
+          </span>
+        </Col>
+      </Row>
       <br />
       <ListGroup>
         {data.getOwnCardDecks.map((cardDeck) => (
