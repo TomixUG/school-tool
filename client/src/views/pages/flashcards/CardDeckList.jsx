@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, Col, Row } from 'reactstrap';
+import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, Col, Row, Card } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { Plus } from 'react-feather';
 
@@ -31,22 +31,37 @@ function CardDeckList() {
         <Col xs="12" md="8">
           <h1>List of your card decks</h1>
         </Col>
-        <Col xs="6" md="4">
-          <span className="float-md-right ">
-            <Button color="primary" onClick={() => setModal(true)}>
-              <Plus /> Deck
-            </Button>
-          </span>
-        </Col>
+        {data.getOwnCardDecks.length !== 0 ? (
+          <Col xs="6" md="4">
+            <span className="float-md-right ">
+              <Button color="primary" onClick={() => setModal(true)}>
+                <Plus /> Deck
+              </Button>
+            </span>
+          </Col>
+        ) : null}
       </Row>
       <br />
       <ListGroup>
-        {data.getOwnCardDecks.map((cardDeck) => (
-          <ListGroupItem action onClick={() => history.push('/flashcards/deck/' + cardDeck.id)}>
-            <ListGroupItemHeading style={{ fontSize: '135%', color: 'black' }}>{cardDeck.name}</ListGroupItemHeading>
-            <ListGroupItemText>{cardDeck.description}</ListGroupItemText>
-          </ListGroupItem>
-        ))}
+        {data.getOwnCardDecks.length !== 0 ? (
+          data.getOwnCardDecks.map((cardDeck) => (
+            <ListGroupItem action onClick={() => history.push('/flashcards/deck/' + cardDeck.id)}>
+              <ListGroupItemHeading style={{ fontSize: '135%', color: 'black' }}>{cardDeck.name}</ListGroupItemHeading>
+              <ListGroupItemText>{cardDeck.description}</ListGroupItemText>
+            </ListGroupItem>
+          ))
+        ) : (
+          <>
+            <div className="m-t-xxl text-center">
+              <h2>
+                <b>Create your first deck</b>
+              </h2>
+              <Button color="primary" onClick={() => setModal(true)}>
+                <Plus /> Deck
+              </Button>
+            </div>
+          </>
+        )}
       </ListGroup>
     </div>
   );
