@@ -9,8 +9,8 @@ const MODIFY_DECK_NAME = gql`
   }
 `;
 
-function Name({ cardDeckId, modal, name, refetch }) {
-  const { register, handleSubmit } = useForm({ defaultValues: { name: name } });
+function Name({ cardDeckId, modal, data, refetch }) {
+  const { register, handleSubmit } = useForm({ defaultValues: { name: data.name } });
 
   const [d, setD] = useState(false);
   const [e, setE] = useState(false);

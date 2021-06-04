@@ -43,7 +43,7 @@ function Deck(props) {
         close={() => setModal(false)}
         refetch={refetch}
         cardDeckId={cardDeckId}
-        name={data.getCardDeck.name}
+        data={data.getCardDeck}
       />
       {/* Header */}
       <Row>
