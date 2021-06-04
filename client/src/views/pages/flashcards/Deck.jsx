@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, Row, Col, Card, CardHeader, CardBody, Button } from 'reactstrap';
 import moment from 'moment';
 import { gql, useQuery } from '@apollo/client';
-import { X, Play, Plus } from 'react-feather';
+import { X, Play, Plus, Settings } from 'react-feather';
 import { useHistory } from 'react-router-dom';
 
 import CardList from './Deck/CardList';
+import DeckSettings from './Deck/Settings/DeckSettings';
 
 const GET_OWN_CARD_DECKS = gql`
   query getCardDeck($cardDeckId: String!) {
@@ -27,6 +28,9 @@ const GET_OWN_CARD_DECKS = gql`
 function Deck(props) {
   const cardDeckId = props.match.params.id;
   let history = useHistory();
+
+  const [modal, setModal] = useState(false);
+
   const { loading, error, data, refetch } = useQuery(GET_OWN_CARD_DECKS, { variables: { cardDeckId: cardDeckId } });
 
   if (loading) return <h1>Loading..</h1>;
@@ -34,6 +38,13 @@ function Deck(props) {
 
   return (
     <div>
+      <DeckSettings
+        modal={modal}
+        close={() => setModal(false)}
+        refetch={refetch}
+        cardDeckId={cardDeckId}
+        name={data.getCardDeck.name}
+      />
       {/* Header */}
       <Row>
         <Col xs="12" md="12">
@@ -45,6 +56,9 @@ function Deck(props) {
                 </Col>
                 <Col xs="12" md="6">
                   <span className="float-md-right ">
+                    <Button color="primary" size="sm" onClick={() => setModal(true)}>
+                      <Settings /> Settings
+                    </Button>{' '}
                     <Button color="danger" size="sm" onClick={() => history.push('/flashcards')}>
                       <X /> Exit
                     </Button>
