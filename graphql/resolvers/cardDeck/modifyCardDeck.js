@@ -23,7 +23,8 @@ module.exports = {
         name: name,
         description: description,
       };
-      for (let prop in params) if (!params[prop]) delete params[prop]; //remove if value is null
+      for (let prop in params)
+        if (params[prop] === undefined) delete params[prop]; //remove if value is null
 
       const cd = await CardDecks.findOneAndUpdate(
         { id: cardDeckId, userId: data.userId },
