@@ -44,7 +44,7 @@ function Description({ cardDeckId, modal, data, refetch }) {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <Label for="exampleEmail">Description</Label>
-          <Input innerRef={register} name="description" />
+          <Input innerRef={register} name="description" required />
         </FormGroup>
 
         {loading === false ? (
