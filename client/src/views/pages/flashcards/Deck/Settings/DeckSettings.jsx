@@ -4,6 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import Name from './Name';
 import Description from './Description';
+import Delete from './Delete';
 
 function DeckSettings({ modal, close, refetch, cardDeckId, data }) {
   return (
@@ -14,6 +15,8 @@ function DeckSettings({ modal, close, refetch, cardDeckId, data }) {
           <Name cardDeckId={cardDeckId} data={data} modal={modal} refetch={refetch} />
           <hr />
           <Description cardDeckId={cardDeckId} data={data} modal={modal} refetch={refetch} />
+          <hr />
+          <Delete cardDeckId={cardDeckId} refetch={refetch} />
         </ModalBody>
         <ModalFooter>
           <Button color="danger" onClick={close}>
