@@ -3,6 +3,8 @@ import { FormGroup, Label, Button, Spinner, Form, Input, Alert } from 'reactstra
 import { useForm } from 'react-hook-form';
 import { useMutation, gql } from '@apollo/client';
 
+import Optional from '../../../../util/Optional';
+
 const MODIFY_DECK_DESCRIPTION = gql`
   mutation modifyCardDeck($cardDeckId: String!, $description: String) {
     modifyCardDeck(cardDeckId: $cardDeckId, description: $description)
@@ -43,7 +45,9 @@ function Description({ cardDeckId, modal, data, refetch }) {
       {e && error && <Alert color="danger">{error.message}</Alert>}
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
-          <Label for="exampleEmail">Description</Label>
+          <Label for="exampleEmail">
+            Description <Optional />
+          </Label>
           <Input innerRef={register} name="description" />
         </FormGroup>
 

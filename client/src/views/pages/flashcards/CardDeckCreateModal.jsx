@@ -15,6 +15,8 @@ import {
 import { useMutation, gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 
+import Optional from '../../../views/util/Optional';
+
 const CREATE_CARD_DECK = gql`
   mutation createCardDeck($name: String!, $description: String) {
     createCardDeck(name: $name, description: $description)
@@ -57,11 +59,13 @@ function CardDeckCreateModal({ modal, close, refetch }) {
 
           <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
-              <Label for="exampleEmail">Name *</Label>
+              <Label for="exampleEmail">Name</Label>
               <Input name="name" innerRef={register} required />
             </FormGroup>
             <FormGroup>
-              <Label for="exampleEmail">Description</Label>
+              <Label for="exampleEmail">
+                Description <Optional />
+              </Label>
               <Input name="description" innerRef={register} />
             </FormGroup>
 
