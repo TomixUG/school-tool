@@ -1,8 +1,11 @@
 import React from 'react';
-import { Badge } from 'reactstrap';
 
 function Optional() {
-  return <Badge color="info">Optional</Badge>;
+  return (
+    <>
+      - <i style={{ fontSize: 13 }}>optional</i>
+    </>
+  );
 }
 
 export default Optional;
