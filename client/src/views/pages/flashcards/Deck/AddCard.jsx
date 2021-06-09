@@ -19,10 +19,10 @@ function AddCard(props) {
   var [addCard, { data, loading, error }] = useMutation(ADD_CARD, { onError() {} });
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (sdata, e) => {
+  const onSubmit = async (sdata, e) => {
     console.log(sdata);
-    addCard({ variables: { cardDeckId: cardDeckId, front: sdata.front, back: sdata.back } });
-    e.target.reset();
+    var d = await addCard({ variables: { cardDeckId: cardDeckId, front: sdata.front, back: sdata.back } });
+    if (d) e.target.reset();
   };
 
   return (
