@@ -12,7 +12,7 @@ const server = new ApolloServer({
   debug: true,
   context: ({ req }) => ({ req }),
 });
-const port = 4000 || process.env.PORT;
+const port = process.env.PORT || 4000;
 
 mongoose
   .connect(process.env.DB_URL, {
