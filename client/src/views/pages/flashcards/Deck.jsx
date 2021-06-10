@@ -95,8 +95,7 @@ function Deck(props) {
           <Card className="h-100">
             <CardHeader>Play</CardHeader>
             <CardBody style={{ textAlign: 'center' }}>
-              {/* TODO: */}
-              <Button size="lg" color="success">
+              <Button size="lg" color="success" onClick={() => history.push(`/flashcards/deck/${cardDeckId}/play`)}>
                 <Play /> Start learning
               </Button>
             </CardBody>
