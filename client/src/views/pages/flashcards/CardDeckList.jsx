@@ -4,6 +4,7 @@ import { ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Butt
 import { useHistory } from 'react-router-dom';
 import { Plus } from 'react-feather';
 
+import PageLoading from '../../util/PageLoading';
 import CardDeckCreateModal from './CardDeckCreateModal';
 
 const GET_OWN_CARD_DECKS = gql`
@@ -22,7 +23,7 @@ function CardDeckList() {
   let history = useHistory();
   const { loading, error, data, refetch } = useQuery(GET_OWN_CARD_DECKS);
 
-  if (loading) return <h1>Loading..</h1>;
+  if (loading) return <PageLoading />;
   if (error) return `Error! ${error.message}`;
   return (
     <div>

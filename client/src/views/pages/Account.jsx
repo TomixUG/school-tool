@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react'
 import { gql, useQuery } from '@apollo/client';
 
+import PageLoading from "../util/PageLoading";
+
 const GET_PROFILE = gql`
   query getOwnProfile {
     getOwnProfile {
@@ -14,7 +16,7 @@ const GET_PROFILE = gql`
 function Account() {
     const { loading, error, data } = useQuery(GET_PROFILE);
 
-    if (loading) return <h1>Loading..</h1>;
+    if (loading) return <PageLoading />;
     if (error) return `Error! ${error.message}`;
 
     return (

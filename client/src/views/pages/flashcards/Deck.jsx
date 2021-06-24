@@ -5,6 +5,7 @@ import { gql, useQuery } from '@apollo/client';
 import { X, Play, Plus, Settings } from 'react-feather';
 import { useHistory } from 'react-router-dom';
 
+import PageLoading from './../../util/PageLoading';
 import CardList from './Deck/CardList';
 import DeckSettings from './Deck/Settings/DeckSettings';
 
@@ -33,7 +34,7 @@ function Deck(props) {
 
   const { loading, error, data, refetch } = useQuery(GET_OWN_CARD_DECKS, { variables: { cardDeckId: cardDeckId } });
 
-  if (loading) return <h1>Loading..</h1>;
+  if (loading) return <PageLoading />;
   if (error) return <Alert color="danger">{error.message}</Alert>;
 
   return (

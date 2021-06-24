@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { Table, Button } from 'reactstrap';
-import AdminDeleteModal from './AdminDeleteModal';
 import { Trash2 } from 'react-feather';
+
+import PageLoading from '../../util/PageLoading';
+import AdminDeleteModal from './AdminDeleteModal';
 
 const GET_REGISTERED_USERS = gql`
   query getRegisteredUsers {
@@ -26,7 +28,7 @@ function ListOfUsers() {
     name: null,
   });
 
-  if (loading) return <h1>Loading..</h1>;
+  if (loading) return <PageLoading />;
   if (error) return `Error! ${error.message}`;
   return (
     <div>
