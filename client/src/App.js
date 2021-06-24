@@ -6,6 +6,7 @@ import { onError } from '@apollo/client/link/error';
 import PageAlertContext from './vibe/components/utilities/ContextProviders';
 import './vibe/scss/styles.scss';
 import './style.css';
+import ScrollToTop from './util/ScrollToTop';
 
 import authCookies from './util/authCookies';
 import { AuthContext } from './util/AuthContext';
@@ -88,6 +89,7 @@ export default function App() {
     <PageAlertContext>
       <ApolloProvider client={client}>
         <BrowserRouter>
+          <ScrollToTop />
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
