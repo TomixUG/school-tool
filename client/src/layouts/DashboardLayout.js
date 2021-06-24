@@ -13,6 +13,8 @@ import { gql, useLazyQuery } from '@apollo/client';
 import authCookies from '../util/authCookies';
 import { AuthContext } from '../util/AuthContext';
 
+import SiteLoading from '../views/util/SiteLoading';
+
 const MOBILE_SIZE = 992;
 
 const GET_OWN_PROFILE = gql`
@@ -109,7 +111,7 @@ function DashboardLayout(props) {
   };
 
   if (loading) {
-    return <h1>Loading</h1>;
+    return <SiteLoading />;
   }
   return (
     <>
