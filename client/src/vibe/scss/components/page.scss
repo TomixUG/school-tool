@@ -19,6 +19,12 @@
 #primary-content {
   padding: $pageContentPadding;
 }
+// make padding smaller on small screen
+@media (max-width: 767px) {
+  #primary-content {
+    padding: $pageMobileContentPadding;
+  }
+}
 .page-container {
   width: 100%;
   margin: auto;
