@@ -22,6 +22,7 @@ function AddCard(props) {
   const onSubmit = async (sdata, e) => {
     console.log(sdata);
     var d = await addCard({ variables: { cardDeckId: cardDeckId, front: sdata.front, back: sdata.back } });
+    window.scrollTo(0, 0);
     if (d) e.target.reset();
   };
 
