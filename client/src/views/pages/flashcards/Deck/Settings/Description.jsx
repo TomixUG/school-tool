@@ -11,8 +11,8 @@ const MODIFY_DECK_DESCRIPTION = gql`
   }
 `;
 
-function Description({ cardDeckId, modal, data, refetch }) {
-  const { register, handleSubmit } = useForm({ defaultValues: { description: data.description } });
+function Description({ cardDeckId, modal, dataD, refetch }) {
+  const { register, handleSubmit } = useForm();
 
   const [d, setD] = useState(false);
   const [e, setE] = useState(false);
@@ -48,7 +48,7 @@ function Description({ cardDeckId, modal, data, refetch }) {
           <Label for="exampleEmail">
             Description <Optional />
           </Label>
-          <Input innerRef={register} name="description" />
+          <Input {...register('description')} defaultValue={dataD.description} />
         </FormGroup>
 
         {loading === false ? (

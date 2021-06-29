@@ -3,7 +3,7 @@ import { Card, CardBody, Row, Col, Button, Input, Form, Spinner, Alert } from 'r
 import { useMutation, gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { Edit2, Trash2, Check } from 'react-feather';
-import TextareaAutosize from 'react-autosize-textarea';
+import TextareaAutosize from 'react-textarea-autosize';
 import CardRemoveModal from './CardRemoveModal';
 
 const MODIFY_CARD = gql`
@@ -63,8 +63,7 @@ function CardList({ qData, refetch, cardDeckId }) {
                         <TextareaAutosize
                           className="form-control"
                           defaultValue={card.front}
-                          ref={register}
-                          name="front"
+                          {...register('front', { required: true })}
                           required
                         />
                       </Col>
@@ -72,8 +71,7 @@ function CardList({ qData, refetch, cardDeckId }) {
                         <TextareaAutosize
                           className="form-control"
                           defaultValue={card.back}
-                          ref={register}
-                          name="back"
+                          {...register('back', { required: true })}
                           required
                         />
                       </Col>

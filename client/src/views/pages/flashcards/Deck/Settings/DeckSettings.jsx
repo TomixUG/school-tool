@@ -12,9 +12,9 @@ function DeckSettings({ modal, close, refetch, cardDeckId, data }) {
       <Modal isOpen={modal} toggle={close}>
         <ModalHeader toggle={close}>Deck settings</ModalHeader>
         <ModalBody>
-          <Name cardDeckId={cardDeckId} data={data} modal={modal} refetch={refetch} />
+          <Name cardDeckId={cardDeckId} dataD={data} modal={modal} refetch={refetch} />
           <hr />
-          <Description cardDeckId={cardDeckId} data={data} modal={modal} refetch={refetch} />
+          <Description cardDeckId={cardDeckId} dataD={data} modal={modal} refetch={refetch} />
           <hr />
           <Delete cardDeckId={cardDeckId} refetch={refetch} />
         </ModalBody>

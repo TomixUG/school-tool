@@ -5,7 +5,7 @@ import { useMutation, gql } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { ArrowLeft } from 'react-feather';
-import TextareaAutosize from 'react-autosize-textarea';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const ADD_CARD = gql`
   mutation addCard($cardDeckId: String!, $front: String!, $back: String!) {
@@ -51,11 +51,21 @@ function AddCard(props) {
           <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
               <Label for="exampleEmail">Front</Label>
-              <TextareaAutosize className="form-control" ref={register} name="front" required rows={4} />
+              <TextareaAutosize
+                className="form-control"
+                {...register('front', { required: true })}
+                required
+                minRows={4}
+              />
             </FormGroup>
             <FormGroup>
               <Label for="exampleEmail">Back</Label>
-              <TextareaAutosize className="form-control" ref={register} name="back" required rows={4} />
+              <TextareaAutosize
+                className="form-control"
+                {...register('back', { required: true })}
+                required
+                minRows={4}
+              />
             </FormGroup>
             <hr />
 

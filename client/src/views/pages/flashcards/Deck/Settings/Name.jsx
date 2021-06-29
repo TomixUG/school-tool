@@ -9,8 +9,8 @@ const MODIFY_DECK_NAME = gql`
   }
 `;
 
-function Name({ cardDeckId, modal, data, refetch }) {
-  const { register, handleSubmit } = useForm({ defaultValues: { name: data.name } });
+function Name({ cardDeckId, modal, dataD, refetch }) {
+  const { register, handleSubmit } = useForm();
 
   const [d, setD] = useState(false);
   const [e, setE] = useState(false);
@@ -44,7 +44,7 @@ function Name({ cardDeckId, modal, data, refetch }) {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <Label for="exampleEmail">Name</Label>
-          <Input innerRef={register} name="name" required />
+          <Input {...register('name', { required: true })} defaultValue={dataD.name} required />
         </FormGroup>
 
         {loading === false ? (

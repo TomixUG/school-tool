@@ -60,13 +60,13 @@ function CardDeckCreateModal({ modal, close, refetch }) {
           <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
               <Label for="exampleEmail">Name</Label>
-              <Input name="name" innerRef={register} required />
+              <Input name="name" {...register('name', { required: true })} required />
             </FormGroup>
             <FormGroup>
               <Label for="exampleEmail">
                 Description <Optional />
               </Label>
-              <Input name="description" innerRef={register} />
+              <Input {...register('description')} />
             </FormGroup>
 
             {loading === false ? (

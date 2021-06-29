@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Alert, Spinner } from 'reactstrap';
 // import Cookies from 'universal-cookie';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { useMutation, gql } from '@apollo/client';
 
-import authCookies from "../../../util/authCookies";
+import authCookies from '../../../util/authCookies';
 
 import './login.css';
 
@@ -23,9 +23,9 @@ function Login() {
   let history = useHistory();
 
   //check if user is already logged in
-  useEffect(()=>{
-    if(authCookies.getAuthCookies()){
-      history.push("/");
+  useEffect(() => {
+    if (authCookies.getAuthCookies()) {
+      history.push('/');
     }
   }, []);
 
@@ -34,12 +34,12 @@ function Login() {
     update(_, result) {
       //DATA IS HERE
       authCookies.setLoginAuthCookies(result);
-      history.push("/");
+      history.push('/');
     },
-    onError(err){}
+    onError(err) {},
   });
 
-  const onSubmit = sdata => {
+  const onSubmit = (sdata) => {
     console.log(sdata);
     loginUser({ variables: { email: sdata.email, password: sdata.password } });
   };
@@ -63,8 +63,7 @@ function Login() {
                         placeholder="Email address"
                         required
                         autoFocus
-                        name="email"
-                        ref={register}
+                        {...register('email', { required: true })}
                       />
                       <label htmlFor="inputEmail">Email address</label>
                     </div>
@@ -76,8 +75,7 @@ function Login() {
                         className="form-control"
                         placeholder="Password"
                         required
-                        name="password"
-                        ref={register}
+                        {...register('password', { required: true })}
                       />
                       <label htmlFor="inputPassword">Password</label>
                     </div>

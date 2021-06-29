@@ -68,8 +68,7 @@ function Register() {
                       placeholder="Username"
                       required
                       autoFocus
-                      name="username"
-                      ref={register}
+                      {...register('username', { required: true })}
                     />
                     <label htmlFor="inputUsername">Username</label>
                   </div>
@@ -82,8 +81,7 @@ function Register() {
                       placeholder="Email address"
                       required
                       autoFocus
-                      name="email"
-                      ref={register}
+                      {...register('email', { required: true })}
                     />
                     <label htmlFor="inputEmail">Email address</label>
                   </div>
@@ -95,8 +93,7 @@ function Register() {
                       className="form-control"
                       placeholder="Password"
                       required
-                      name="password"
-                      ref={register}
+                      {...register('password', { required: true })}
                     />
                     <label htmlFor="inputPassword">Password</label>
                   </div>
@@ -108,8 +105,7 @@ function Register() {
                       className="form-control"
                       placeholder="Confirm Password"
                       required
-                      name="confirmPassword"
-                      ref={register}
+                      {...register('confirmPassword', { required: true })}
                     />
                     <label htmlFor="inputCPassword">Confirm Password</label>
                   </div>
@@ -119,8 +115,7 @@ function Register() {
                       type="checkbox"
                       className="custom-control-input"
                       id="customCheck1"
-                      name="agree"
-                      ref={register}
+                      {...register('agree', { required: true })}
                       required
                     />
                     <label className="custom-control-label" htmlFor="customCheck1">
