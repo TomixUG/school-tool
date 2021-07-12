@@ -51,7 +51,7 @@ module.exports = gql`
 
   type CardDeck {
     name: String!
-    description: String!
+    description: String
     createdAt: String!
     numberOfCards: Int!
     cards: [Card]!
