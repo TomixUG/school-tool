@@ -5,7 +5,11 @@ const CardDecks = require("../../../models/CardDecks");
 
 module.exports = {
   Mutation: {
-    async modifyCard(_, { cardDeckId, cardId, front, back, score }, context) {
+    async modifyCard(
+      _,
+      { cardDeckId, cardId, front, back, timeSpent, status },
+      context
+    ) {
       const data = checkAuth(context);
       //validate input
       var validation = cardValidation({
@@ -22,7 +26,8 @@ module.exports = {
       var params = {
         "cards.$.front": front,
         "cards.$.back": back,
-        "cards.$.score": score,
+        "cards.$.timeSpent": timeSpent,
+        "cards.$.status": status,
       };
       for (let prop in params) if (!params[prop]) delete params[prop]; //remove if value is null
 

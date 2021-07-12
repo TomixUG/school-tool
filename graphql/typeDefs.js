@@ -34,12 +34,21 @@ module.exports = gql`
     id: String!
     createdAt: String!
   }
+
+  enum CardStatus {
+    UNPLAYED
+    GOOD
+    BAD
+  }
+
   type Card {
     id: String!
     front: String!
     back: String!
-    score: Float
+    timeSpent: Float
+    status: CardStatus!
   }
+
   type CardDeck {
     name: String!
     description: String!
@@ -79,7 +88,8 @@ module.exports = gql`
       cardId: String!
       front: String
       back: String
-      score: Float
+      timeSpent: Float
+      status: CardStatus
     ): Boolean!
     removeCard(cardDeckId: String!, cardId: String!): Boolean!
   }

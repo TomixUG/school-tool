@@ -20,7 +20,6 @@ const GET_OWN_CARD_DECKS = gql`
         id
         front
         back
-        score
       }
     }
   }

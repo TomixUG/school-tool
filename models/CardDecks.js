@@ -27,7 +27,8 @@ const schema = new mongoose.Schema({
       id: { type: String, default: cardId },
       front: { type: String, required: true },
       back: { type: String, required: true },
-      score: { type: Number, required: true, default: -1 },
+      timeSpent: { type: Number, required: false },
+      status: { type: "String", default: "UNPLAYED" },
     },
   ],
 });
