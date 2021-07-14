@@ -4,6 +4,7 @@ import { Card, Row, Col, CardBody, Button, Alert } from 'reactstrap';
 import { X } from 'react-feather';
 import { useHistory } from 'react-router-dom';
 import Logic from './Logic';
+import shuffle from '../../../../util/shuffleArray';
 
 import PageLoading from './../../../util/PageLoading';
 
@@ -43,7 +44,7 @@ function Play(props) {
         if (data.getCardDeck.cards[i].status === 'BAD') bad.push(data.getCardDeck.cards[i]);
       }
 
-      data.getCardDeck.cards = unplayed.concat(bad, good);
+      data.getCardDeck.cards = shuffle(unplayed).concat(shuffle(bad), shuffle(good)); // TODO: make card randomization optional in settings
 
       setSorted(true);
     },
