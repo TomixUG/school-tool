@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardBody, Row, Col, Button, Alert, Spinner } from 'reactstrap';
 import { useMutation, gql } from '@apollo/client';
 
@@ -13,6 +13,13 @@ const MODIFY_CARD = gql`
 function Logic({ data, cardDeckId }) {
   const [index, setIndex] = useState(0);
   const [opened, setOpened] = useState(false);
+
+  const [startTime, setStartTime] = useState();
+  useEffect(() => setStartTime(new Date()), []); // update startTime on page load
+  useEffect(() => setStartTime(new Date()), [index]); // update startTime on card change
+  function getElapsedTime() {
+    return new Date() - startTime;
+  }
 
   var [modifyCard, { data: _, loading, error }] = useMutation(MODIFY_CARD, {
     onCompleted() {
@@ -100,6 +107,7 @@ function Logic({ data, cardDeckId }) {
                           cardDeckId: cardDeckId,
                           cardId: data.getCardDeck.cards[index].id,
                           status: 'GOOD',
+                          timeSpent: getElapsedTime(),
                         },
                       });
                     }}
@@ -115,6 +123,7 @@ function Logic({ data, cardDeckId }) {
                           cardDeckId: cardDeckId,
                           cardId: data.getCardDeck.cards[index].id,
                           status: 'BAD',
+                          timeSpent: getElapsedTime(),
                         },
                       });
                     }}
