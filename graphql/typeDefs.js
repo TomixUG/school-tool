@@ -92,5 +92,6 @@ module.exports = gql`
       status: CardStatus
     ): Boolean!
     removeCard(cardDeckId: String!, cardId: String!): Boolean!
+    resetCards(cardDeckId: String!): Boolean!
   }
 `;
