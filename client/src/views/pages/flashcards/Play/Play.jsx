@@ -27,8 +27,9 @@ function Play(props) {
   const cardDeckId = props.match.params.id;
   let history = useHistory();
 
-  const { loading, error, data } = useQuery(GET_CARD_DECK, {
+  const { loading, error, data, refetch } = useQuery(GET_CARD_DECK, {
     variables: { cardDeckId: cardDeckId },
+    notifyOnNetworkStatusChange: true,
   });
 
   if (loading) return <PageLoading />;
@@ -68,7 +69,7 @@ function Play(props) {
           <b>No cards have been added yet</b>
         </h3>
       ) : (
-        <Logic data={data} cardDeckId={cardDeckId} />
+        <Logic data={data} cardDeckId={cardDeckId} refetch={refetch} />
       )}
     </div>
   );

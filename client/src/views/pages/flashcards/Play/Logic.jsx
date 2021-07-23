@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardBody, Row, Col, Button, Alert, Spinner } from 'reactstrap';
 import { useMutation, gql } from '@apollo/client';
 
-import { X, Check } from 'react-feather';
+import { X, Check, Play } from 'react-feather';
 
 const MODIFY_CARD = gql`
   mutation modifyCard($cardDeckId: String!, $cardId: String!, $timeSpent: Float, $status: CardStatus) {
@@ -10,9 +10,10 @@ const MODIFY_CARD = gql`
   }
 `;
 
-function Logic({ data, cardDeckId }) {
+function Logic({ data, cardDeckId, refetch }) {
   const [index, setIndex] = useState(0);
   const [opened, setOpened] = useState(false);
+  const [finished, setFinished] = useState(false);
 
   const [startTime, setStartTime] = useState();
   useEffect(() => setStartTime(new Date()), []); // update startTime on page load
@@ -38,8 +39,30 @@ function Logic({ data, cardDeckId }) {
     if (index + 1 < data.getCardDeck.cards.length) {
       setIndex(index + 1);
       setOpened(false);
+    } else {
+      // deck completed
+      setFinished(true);
     }
   }
+
+  if (finished)
+    return (
+      <>
+        <h3>
+          <b>You have finished this deck</b>
+        </h3>
+        <Button
+          color="success"
+          onClick={() => {
+            refetch();
+            setIndex(0);
+            setFinished(false);
+          }}
+        >
+          <Play /> Play again
+        </Button>
+      </>
+    );
 
   return (
     <div>
