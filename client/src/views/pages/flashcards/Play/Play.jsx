@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { Card, Row, Col, CardBody, Button, Alert } from 'reactstrap';
 import { X } from 'react-feather';
 import { useHistory } from 'react-router-dom';
 import Logic from './Logic';
-import shuffle from '../../../../util/shuffleArray';
 
 import PageLoading from './../../../util/PageLoading';
 
@@ -28,26 +27,8 @@ function Play(props) {
   const cardDeckId = props.match.params.id;
   let history = useHistory();
 
-  const [sorted, setSorted] = useState(false);
-
   const { loading, error, data } = useQuery(GET_CARD_DECK, {
     variables: { cardDeckId: cardDeckId },
-    onCompleted() {
-      //sort the cards
-      var unplayed = [];
-      var good = [];
-      var bad = [];
-
-      for (var i = 0; i < data.getCardDeck.cards.length; i++) {
-        if (data.getCardDeck.cards[i].status === 'UNPLAYED') unplayed.push(data.getCardDeck.cards[i]);
-        if (data.getCardDeck.cards[i].status === 'GOOD') good.push(data.getCardDeck.cards[i]);
-        if (data.getCardDeck.cards[i].status === 'BAD') bad.push(data.getCardDeck.cards[i]);
-      }
-
-      data.getCardDeck.cards = shuffle(unplayed).concat(shuffle(bad), shuffle(good)); // TODO: make card randomization optional in settings
-
-      setSorted(true);
-    },
   });
 
   if (loading) return <PageLoading />;
@@ -87,7 +68,7 @@ function Play(props) {
           <b>No cards have been added yet</b>
         </h3>
       ) : (
-        <>{sorted ? <Logic data={data} cardDeckId={cardDeckId} /> : 'sorting ...'}</>
+        <Logic data={data} cardDeckId={cardDeckId} />
       )}
     </div>
   );
