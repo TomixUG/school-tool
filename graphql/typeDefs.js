@@ -64,7 +64,7 @@ module.exports = gql`
     getRegisteredUsers: [RegisteredUsers]
     #carddecks
     getOwnCardDecks: [OwnCardDecks]
-    getCardDeck(cardDeckId: String!): CardDeck!
+    getCardDeck(cardDeckId: String!, sortCards: Boolean): CardDeck!
   }
 
   type Mutation {

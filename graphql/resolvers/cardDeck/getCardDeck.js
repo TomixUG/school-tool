@@ -4,7 +4,7 @@ const errors = require("../../../util/errors");
 const shuffle = require("./../../../util/shuffleArray");
 module.exports = {
   Query: {
-    async getCardDeck(_, { cardDeckId }, context) {
+    async getCardDeck(_, { cardDeckId, sortCards }, context) {
       const data = checkAuth(context);
 
       var db = await CardDecks.findOne({
@@ -12,16 +12,18 @@ module.exports = {
         id: cardDeckId,
       });
 
-      // sort/randomize the cards
-      var unplayed = [];
-      var good = [];
-      var bad = [];
-      for (var i = 0; i < db.cards.length; i++) {
-        if (db.cards[i].status === "UNPLAYED") unplayed.push(db.cards[i]);
-        if (db.cards[i].status === "GOOD") good.push(db.cards[i]);
-        if (db.cards[i].status === "BAD") bad.push(db.cards[i]);
+      if (sortCards !== false) {
+        // sort the cards
+        var unplayed = [];
+        var good = [];
+        var bad = [];
+        for (var i = 0; i < db.cards.length; i++) {
+          if (db.cards[i].status === "UNPLAYED") unplayed.push(db.cards[i]);
+          if (db.cards[i].status === "GOOD") good.push(db.cards[i]);
+          if (db.cards[i].status === "BAD") bad.push(db.cards[i]);
+        }
+        db.cards = shuffle(unplayed).concat(shuffle(bad), shuffle(good));
       }
-      db.cards = shuffle(unplayed).concat(shuffle(bad), shuffle(good));
 
       if (!db) return errors.cardDeckIdNotFound();
       return {

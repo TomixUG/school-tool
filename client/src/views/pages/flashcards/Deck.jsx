@@ -11,7 +11,7 @@ import DeckSettings from './Deck/Settings/DeckSettings';
 
 const GET_OWN_CARD_DECKS = gql`
   query getCardDeck($cardDeckId: String!) {
-    getCardDeck(cardDeckId: $cardDeckId) {
+    getCardDeck(cardDeckId: $cardDeckId, sortCards: false) {
       name
       description
       createdAt
